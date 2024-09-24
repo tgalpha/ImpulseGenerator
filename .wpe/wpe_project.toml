@@ -1,0 +1,50 @@
+[project]
+version = 1
+win_targets = [
+    { platform = 'Authoring', architectures = ['x64'], toolset = 'vc160' },
+#    { platform = 'Windows_vc160', architectures = ['x64'] },
+#    { platform = 'Android', architectures = ['arm64-v8a', 'armeabi-v7a'] },
+]
+mac_targets = [
+#    { platform = 'Authoring', architectures = ['universal'] },
+#    { platform = 'iOS', architectures = ['iOS'] },
+]
+
+[plugin_info]
+MenuPath = 'custom'
+
+[plugin_info.platform_support.Any]
+CanBeInsertOnBusses = false
+CanBeInsertOnAudioObjects = true
+CanBeRendered = false
+
+
+[parameters.defines.duration]
+type = 'float'
+rtpc_type = 'Exclusive'
+default_value = 1
+min_value = 0.01
+max_value = 60
+
+description = [
+    { language = 'en', text = 'The duration of the silence after the trigger signal, in seconds.' },
+    { language = 'zh', text = '冲激信号后的空白时间，单位为秒。' }
+]
+
+
+[parameters.defines.gain]
+type = 'float'
+rtpc_type = 'Exclusive'
+# Optional, Refer to `DataMeaning` section in: https://www.audiokinetic.com/zh/library/edge/?source=SDK&id=plugin_xml_properties.html
+data_meaning = 'Decibels'
+default_value = -6
+min_value = -96
+max_value = 0
+
+description = [
+    { language = 'en', text = 'The gain of the impulse signal, in dB.' },
+    { language = 'zh', text = '单位冲激信号的增益, 单位为 dB。' }
+]
+# Refer to: https://www.audiokinetic.com/zh/library/edge/?source=SDK&id=plugin_xml_properties.html
+user_interface = 'SliderType="1" Step="0.1" Fine="0.01" Decimals="2"'
+
