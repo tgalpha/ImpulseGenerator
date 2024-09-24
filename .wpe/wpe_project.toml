@@ -37,14 +37,14 @@ type = 'float'
 rtpc_type = 'Exclusive'
 # Optional, Refer to `DataMeaning` section in: https://www.audiokinetic.com/zh/library/edge/?source=SDK&id=plugin_xml_properties.html
 data_meaning = 'Decibels'
-default_value = -6
+default_value = 0
 min_value = -96
-max_value = 0
+max_value = 12
 
 description = [
     { language = 'en', text = 'The gain of the impulse signal, in dB.' },
     { language = 'zh', text = '单位冲激信号的增益, 单位为 dB。' }
 ]
 # Refer to: https://www.audiokinetic.com/zh/library/edge/?source=SDK&id=plugin_xml_properties.html
-user_interface = 'SliderType="1" Step="0.1" Fine="0.01" Decimals="2"'
+user_interface = 'SliderType="6" Step="0.1" Fine="0.01" Decimals="2"'
 

@@ -29,7 +29,7 @@ the specific language governing permissions and limitations under the License.
 
 #include "ImpulseGeneratorSourceParams.h"
 
-#include <AK/Plugin/PluginServices/AkFXDurationHandler.h>
+#include "Impulser.h"
 
 /// See https://www.audiokinetic.com/library/edge/?source=SDK&id=soundengine__plugins__source.html
 /// for the documentation about source plug-ins
@@ -67,7 +67,7 @@ private:
     ImpulseGeneratorSourceParams* m_pParams;
     AK::IAkPluginMemAlloc* m_pAllocator;
     AK::IAkSourcePluginContext* m_pContext;
-    AkFXDurationHandler m_durationHandler;
+    Impulser m_core;
 };
 
 #endif // ImpulseGeneratorSource_H

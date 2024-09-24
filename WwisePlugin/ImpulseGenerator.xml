@@ -59,14 +59,14 @@ for the documentation about the plugin xml format
         </Restrictions>
       </Property>
       <Property Name="Gain" Type="Real32" SupportRTPCType="Exclusive" DataMeaning="Decibels" DisplayName="Gain">
-        <UserInterface SliderType="1" Step="0.1" Fine="0.01" Decimals="2" />
-        <DefaultValue>-6</DefaultValue>
+        <UserInterface SliderType="6" Step="0.1" Fine="0.01" Decimals="2" />
+        <DefaultValue>0</DefaultValue>
         <AudioEnginePropertyID>1</AudioEnginePropertyID>
         <Restrictions>
           <ValueRestriction>
             <Range Type="Real32">
               <Min>-96</Min>
-              <Max>0</Max>
+              <Max>12</Max>
             </Range>
           </ValueRestriction>
         </Restrictions>

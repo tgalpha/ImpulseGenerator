@@ -58,7 +58,7 @@ AKRESULT ImpulseGeneratorSource::Init(AK::IAkPluginMemAlloc* in_pAllocator, AK::
     m_pAllocator = in_pAllocator;
     m_pContext = in_pContext;
 
-    m_durationHandler.Setup(m_pParams->RTPC.fDuration, in_pContext->GetNumLoops(), in_rFormat.uSampleRate);
+    m_core.Setup(m_pParams->RTPC.fDuration, in_pContext->GetNumLoops(), in_rFormat.uSampleRate);
 
     return AK_Success;
 }
@@ -71,6 +71,7 @@ AKRESULT ImpulseGeneratorSource::Term(AK::IAkPluginMemAlloc* in_pAllocator)
 
 AKRESULT ImpulseGeneratorSource::Reset()
 {
+    m_core.Reset();
     return AK_Success;
 }
 
@@ -85,28 +86,12 @@ AKRESULT ImpulseGeneratorSource::GetPluginInfo(AkPluginInfo& out_rPluginInfo)
 void ImpulseGeneratorSource::Execute(AkAudioBuffer* out_pBuffer)
 {
     HandleParameterChange();
-    m_durationHandler.ProduceBuffer(out_pBuffer);
-
-    const AkUInt32 uNumChannels = out_pBuffer->NumChannels();
-
-    AkUInt16 uFramesProduced;
-    for (AkUInt32 i = 0; i < uNumChannels; ++i)
-    {
-        AkReal32* AK_RESTRICT pBuf = (AkReal32* AK_RESTRICT)out_pBuffer->GetChannel(i);
-
-        uFramesProduced = 0;
-        while (uFramesProduced < out_pBuffer->uValidFrames)
-        {
-            // Generate output here
-            *pBuf++ = 0.0f;
-            ++uFramesProduced;
-        }
-    }
+    m_core.ProduceBuffer(out_pBuffer);
 }
 
 AkReal32 ImpulseGeneratorSource::GetDuration() const
 {
-    return m_durationHandler.GetDuration() * 1000.0f;
+    return m_core.GetDuration() * 1000.0f;
 }
 
 void ImpulseGeneratorSource::HandleParameterChange()
@@ -114,7 +99,11 @@ void ImpulseGeneratorSource::HandleParameterChange()
     auto pChangeHandler = m_pParams->GetParamChangeHandler();
     if (pChangeHandler->HasChanged(PARAM_DURATION_ID))
     {
-        m_durationHandler.SetDuration(m_pParams->RTPC.fDuration);
+        m_core.SetDuration(m_pParams->RTPC.fDuration);
+    }
+    if (pChangeHandler->HasChanged(PARAM_GAIN_ID))
+    {
+        m_core.SetAmplitude(AK_DBTOLIN(m_pParams->RTPC.fGain));
     }
 
     pChangeHandler->ResetAllParamChanges();

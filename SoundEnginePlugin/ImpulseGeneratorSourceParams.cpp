@@ -57,7 +57,7 @@ AKRESULT ImpulseGeneratorSourceParams::Init(AK::IAkPluginMemAlloc* in_pAllocator
         // Initialize default parameters here
         // [ParameterInitialization]
         RTPC.fDuration = 1;
-        RTPC.fGain = -6;
+        RTPC.fGain = 0;
         // [/ParameterInitialization]
         m_paramChangeHandler.SetAllParamChanges();
         return AK_Success;
