@@ -15,7 +15,7 @@
 #undef APSTUDIO_READONLY_SYMBOLS
 
 /////////////////////////////////////////////////////////////////////////////
-// Chinese (Simplified, PRC) resources
+// 中文(简体，中国) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_CHS)
 LANGUAGE LANG_CHINESE, SUBLANG_CHINESE_SIMPLIFIED
@@ -56,9 +56,19 @@ STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_CLIPCHILDREN | WS_SY
 EXSTYLE WS_EX_CONTROLPARENT
 FONT 8, "MS Shell Dlg", 400, 0, 0x1
 BEGIN
-// [Controls]
-LTEXT           "Class=SuperRange;Prop=Property",IDC_Property,48,18,60,12
-// [/Controls]
+    LTEXT           "Duration",IDC_STATIC,0,8,48,10
+    LTEXT           "Class=SuperRange;Prop=Duration",IDC_Duration,48,6,64,12
+    LTEXT           "Gain",IDC_STATIC,0,26,48,10
+    LTEXT           "Class=SuperRange;Prop=Gain",IDC_Gain,48,24,64,12
+END
+
+IDD_DIALOG2 DIALOGEX 0, 0, 309, 176
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CONTROL | WS_CHILD | WS_CLIPCHILDREN | WS_SYSMENU
+EXSTYLE WS_EX_CONTROLPARENT
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    LTEXT           "Class=SuperRange;Prop=Duration",IDC_Duration,0,1,54,12
+    LTEXT           "Class=SuperRange;Prop=Gain",IDC_Gain,60,1,54,12
 END
 
 
@@ -71,6 +81,14 @@ END
 GUIDELINES DESIGNINFO
 BEGIN
     IDD_DIALOG1, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 302
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 169
+    END
+
+    IDD_DIALOG2, DIALOG
     BEGIN
         LEFTMARGIN, 7
         RIGHTMARGIN, 302
@@ -91,7 +109,12 @@ BEGIN
     0
 END
 
-#endif    // Chinese (Simplified, PRC) resources
+IDD_DIALOG2 AFX_DIALOG_LAYOUT
+BEGIN
+    0
+END
+
+#endif    // 中文(简体，中国) resources
 /////////////////////////////////////////////////////////////////////////////
 
 

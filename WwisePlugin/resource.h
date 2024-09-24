@@ -1,11 +1,11 @@
 ﻿//{{NO_DEPENDENCIES}}
-// Microsoft Visual C++ generated include file.
-// Used by ImpulseGenerator.rc
+// Microsoft Visual C++ 生成的包含文件。
+// 供 ImpulseGenerator.rc 使用
 //
 #define IDD_DIALOG1                     101
-// [IDC]
-#define IDC_Property 1001
-// [/IDC]
+#define IDD_DIALOG2                     102
+#define IDC_Duration                    1001
+#define IDC_Gain                        1002
 
 // Next default values for new objects
 // 
