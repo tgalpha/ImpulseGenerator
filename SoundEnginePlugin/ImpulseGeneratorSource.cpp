@@ -111,11 +111,11 @@ AkReal32 ImpulseGeneratorSource::GetDuration() const
 
 void ImpulseGeneratorSource::HandleParameterChange()
 {
-    auto& pChangeHandler = m_pParams->m_paramChangeHandler;
-    if (pChangeHandler.HasChanged(PARAM_DURATION_ID))
+    auto pChangeHandler = m_pParams->GetParamChangeHandler();
+    if (pChangeHandler->HasChanged(PARAM_DURATION_ID))
     {
         m_durationHandler.SetDuration(m_pParams->RTPC.fDuration);
     }
 
-    pChangeHandler.ResetAllParamChanges();
+    pChangeHandler->ResetAllParamChanges();
 }

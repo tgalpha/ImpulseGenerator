@@ -14,7 +14,7 @@ ImpulseGeneratorPluginGUI::ImpulseGeneratorPluginGUI()
 ADD_AUDIOPLUGIN_CLASS_TO_CONTAINER(
     ImpulseGenerator,            // Name of the plug-in container for this shared library
     ImpulseGeneratorPluginGUI,   // Authoring plug-in class to add to the plug-in container
-    ImpulseGeneratorSource       // Corresponding Sound Engine plug-in class
+    ImpulseGeneratorSource           // Corresponding Sound Engine plug-in class
 );
 
 // [wp-enhanced] Uncomment the following lines if you want to use a custom GUI

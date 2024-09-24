@@ -23,6 +23,7 @@ the specific language governing permissions and limitations under the License.
 
   Copyright (c) 2021 Audiokinetic Inc.
 *******************************************************************************/
+// [wp-enhanced template] **Do not delete this line**
 
 #include "ImpulseGeneratorSourceParams.h"
 
@@ -38,6 +39,7 @@ ImpulseGeneratorSourceParams::~ImpulseGeneratorSourceParams()
 
 ImpulseGeneratorSourceParams::ImpulseGeneratorSourceParams(const ImpulseGeneratorSourceParams& in_rParams)
 {
+    InnerType = in_rParams.InnerType;
     RTPC = in_rParams.RTPC;
     NonRTPC = in_rParams.NonRTPC;
     m_paramChangeHandler.SetAllParamChanges();
@@ -53,7 +55,10 @@ AKRESULT ImpulseGeneratorSourceParams::Init(AK::IAkPluginMemAlloc* in_pAllocator
     if (in_ulBlockSize == 0)
     {
         // Initialize default parameters here
-        RTPC.fDuration = 0.0f;
+        // [ParameterInitialization]
+        RTPC.fDuration = 1;
+        RTPC.fGain = -6;
+        // [/ParameterInitialization]
         m_paramChangeHandler.SetAllParamChanges();
         return AK_Success;
     }
@@ -73,7 +78,10 @@ AKRESULT ImpulseGeneratorSourceParams::SetParamsBlock(const void* in_pParamsBloc
     AkUInt8* pParamsBlock = (AkUInt8*)in_pParamsBlock;
 
     // Read bank data here
+    // [ReadBankData]
     RTPC.fDuration = READBANKDATA(AkReal32, pParamsBlock, in_ulBlockSize);
+    RTPC.fGain = READBANKDATA(AkReal32, pParamsBlock, in_ulBlockSize);
+    // [/ReadBankData]
     CHECKBANKDATASIZE(in_ulBlockSize, eResult);
     m_paramChangeHandler.SetAllParamChanges();
 
@@ -87,10 +95,16 @@ AKRESULT ImpulseGeneratorSourceParams::SetParam(AkPluginParamID in_paramID, cons
     // Handle parameter change here
     switch (in_paramID)
     {
+    // [SetParameters]
     case PARAM_DURATION_ID:
         RTPC.fDuration = *((AkReal32*)in_pValue);
         m_paramChangeHandler.SetParamChange(PARAM_DURATION_ID);
         break;
+    case PARAM_GAIN_ID:
+        RTPC.fGain = *((AkReal32*)in_pValue);
+        m_paramChangeHandler.SetParamChange(PARAM_GAIN_ID);
+        break;
+    // [/SetParameters]
     default:
         eResult = AK_InvalidParameter;
         break;

@@ -30,6 +30,7 @@ the specific language governing permissions and limitations under the License.
 
 // [PropertyNames]
 const char* const szDuration = "Duration";
+const char* const szGain = "Gain";
 // [/PropertyNames]
 
 ImpulseGeneratorPlugin::ImpulseGeneratorPlugin()
@@ -45,6 +46,7 @@ bool ImpulseGeneratorPlugin::GetBankParameters(const GUID & in_guidPlatform, AK:
     // Write bank data here
     // [WriteBankData]
     in_dataWriter.WriteReal32(m_propertySet.GetReal32(in_guidPlatform, szDuration));
+    in_dataWriter.WriteReal32(m_propertySet.GetReal32(in_guidPlatform, szGain));
     // [/WriteBankData]
 
     return true;
@@ -55,7 +57,7 @@ EXPORT_AUDIOPLUGIN_CONTAINER(ImpulseGenerator);											// This is a DLL, we w
 ADD_AUDIOPLUGIN_CLASS_TO_CONTAINER(                                             // Add our CLI class to the PluginContainer
     ImpulseGenerator,        // Name of the plug-in container for this shared library
     ImpulseGeneratorPlugin,  // Authoring plug-in class to add to the plug-in container
-    ImpulseGeneratorSource   // Corresponding Sound Engine plug-in class
+    ImpulseGeneratorSource       // Corresponding Sound Engine plug-in class
 );
 DEFINE_PLUGIN_REGISTER_HOOK
 

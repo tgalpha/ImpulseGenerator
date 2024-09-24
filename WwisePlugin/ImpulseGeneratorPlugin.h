@@ -31,6 +31,7 @@ the specific language governing permissions and limitations under the License.
 
 // [PropertyNames]
 extern const char* const szDuration;
+extern const char* const szGain;
 // [/PropertyNames]
 
 /// See https://www.audiokinetic.com/library/edge/?source=SDK&id=plugin__dll.html

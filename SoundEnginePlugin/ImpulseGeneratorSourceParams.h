@@ -23,6 +23,7 @@ the specific language governing permissions and limitations under the License.
 
   Copyright (c) 2021 Audiokinetic Inc.
 *******************************************************************************/
+// [wp-enhanced template] **Do not delete this line**
 
 #ifndef ImpulseGeneratorSourceParams_H
 #define ImpulseGeneratorSourceParams_H
@@ -32,16 +33,33 @@ the specific language governing permissions and limitations under the License.
 
 // Add parameters IDs here, those IDs should map to the AudioEnginePropertyID
 // attributes in the xml property definition.
-static const AkPluginParamID PARAM_DURATION_ID = 0;
-static const AkUInt32 NUM_PARAMS = 1;
+// [ParameterID]
+static constexpr AkPluginParamID PARAM_DURATION_ID = 0;
+static constexpr AkPluginParamID PARAM_GAIN_ID = 1;
+static constexpr AkUInt32 NUM_PARAMS = 2;
+// [/ParameterID]
+
+// [InnerTypes]
+// [/InnerTypes]
+
+struct ImpulseGeneratorInnerTypeParams
+{
+    // [InnerTypeDeclaration]
+    // [/InnerTypeDeclaration]
+};
 
 struct ImpulseGeneratorRTPCParams
 {
+    // [RTPCDeclaration]
     AkReal32 fDuration;
+    AkReal32 fGain;
+    // [/RTPCDeclaration]
 };
 
 struct ImpulseGeneratorNonRTPCParams
 {
+    // [NonRTPCDeclaration]
+    // [/NonRTPCDeclaration]
 };
 
 struct ImpulseGeneratorSourceParams
@@ -68,10 +86,14 @@ struct ImpulseGeneratorSourceParams
     /// Update a single parameter at a time and perform the necessary actions on the parameter changes.
     AKRESULT SetParam(AkPluginParamID in_paramID, const void* in_pValue, AkUInt32 in_ulParamSize) override;
 
-    AK::AkFXParameterChangeHandler<NUM_PARAMS> m_paramChangeHandler;
+    AK::AkFXParameterChangeHandler<NUM_PARAMS>* GetParamChangeHandler() { return &m_paramChangeHandler; }
 
+    ImpulseGeneratorInnerTypeParams InnerType;
     ImpulseGeneratorRTPCParams RTPC;
     ImpulseGeneratorNonRTPCParams NonRTPC;
+
+private:
+    AK::AkFXParameterChangeHandler<NUM_PARAMS> m_paramChangeHandler;
 };
 
 #endif // ImpulseGeneratorSourceParams_H
